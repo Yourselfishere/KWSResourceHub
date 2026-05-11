@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+
+{% block title %}Home | KWS Resource Hub{% endblock %}
+
+{% block content %}
+
+    <!-- Hero section -->
+    <section class="hero">
+
+        <!-- Hero container -->
+        <div class="hero-container">
+            <!-- Site name  -->
+            <p>KingsWay Resource Hub</p>
+            <!-- Motto/Main punchline -->
+            <h1>Stop Searching. <br>Start Studying. </h1>
+
+            <!-- Rotating Line -->
+            <p class="rotating-line">
+                Your
+                <span class="text-container">
+                    <span>past papers</span>
+                    <span>video tutorials</span>
+                    <span>study guides</span>
+                    <span>practice questions</span>
+                    <span>past papers</span>
+                </span> in one place.
+            </p>
+            <!-- Description -->
+            <p>A site for Year 12-13 students studying NCEA</p>
+
+            <!-- Down arrow -->
+            <div class="scroll-arrow">
+                <a href="#subjects">
+                    <!-- FontAwesome  -->
+                    <i class="fa-solid fa-arrow-down"></i>
+                </a>
+            </div>
+        </div>
+    </section>
+
+
+    <!-- About this site section-->
+    <section class="about-this-site"> 
+
+        <!-- Limits width section -->
+        <div class="about-container">
+
+            <!-- label  -->
+            <p class="about-label">About</p>
+
+            <!-- section heading -->
+            <h2>What is KWS Resource Hub?</h2>
+
+            <!-- paragraph -->
+            <p class="about-text">KingsWay Resource Hub is designed as a study platform for Year 12-13 students at Kingsway School. It helps solves the headache that is finding NCEA resources. All the resources are here in one place, from past papers and video tutorials to study guides and references.</p>
+        
+        </div>
+
+    </section>
+
+    <!-- Subjects section -->
+    <section class="subject-selection" id="subjects">
+        <!-- Section heading -->
+        <h2>Find resources by subject</h2>
+        
+        <!-- Container section -->
+        <div class="card-container">
+            
+            <!-- Jinja loop for subject cards -->
+            {% for subject in subjects %}
+                <a href="/{{subject.url}}"
+                    class="subject-card {{subject.name | lower}}">
+                        <i class ="{{subject.icon}}"></i>
+                        <h3>{{ subject.name }}</h3>
+                        <p>{{ subject.description }}</p>
+
+                        <!-- Resource Counter placeholder -->
+                        <div class="resource-badge">
+                            {{ subject.resource_count }} 
+                        </div>
+                </a>
+            {% endfor %}
+
+        </div>
+
+    </section>
+ 
+{% endblock %}
+

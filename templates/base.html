@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<!-- Document Setup -->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+    <title>{% block title %} KWS Resource Hub {% endblock %}</title>
+    <!-- Link to CSS -->
+    <link rel="stylesheet" href="/static/css/styles.css">
+    <!-- Link to JS -->
+    <script src="/static/js/script.js" defer></script>  
+    <!-- Font Awesome setup -->
+    <script src="https://kit.fontawesome.com/c703a6f906.js" crossorigin="anonymous"></script>
+</head>
+<body class="{% block body_class %}{% endblock %}">
+    <!-- Top Navigation Bar --> 
+    <nav class="topnavbar">
+        <!-- Logo Section -->
+        <div class="logo">
+            <a href="/"><img src="/static/img/KingsWayLogo.svg" alt="KingsWayLogo"></a>
+        </div>
+
+        <div class="nav-menu-wrapper">
+            <button class="menu-btn" id="menu-btn">
+                <i class="fa-solid fa-bars"></i>
+            </button>
+                <div class="nav-dropdown" id="nav-dropdown">
+                    {% for group_name, group_subjects in menu_group.items() %}
+                    <div class="nav-group">
+                        <div class="nav-group-header">
+                            <i class="fa-solid fa-folder"></i>
+                            {{ group_name }}
+                            <i class="fa-solid fa-chevron-right nav-chevron"></i>
+                        </div>
+                        <div class="nav-submenu">
+                            {% for subject in group_subjects %}
+                            <a href="/{{ subject.url }}" class="nav-subitem">
+                                <i class="{{ subject.icon }}"></i>
+                                {{ subject.name }}
+                            </a>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                    <div class="nav-divider"></div>
+                    {% for subject in menu_solo %}
+                    <a href="/{{ subject.url }}" class="nav-item">
+                        <i class="{{ subject.icon }}"></i>
+                        {{ subject.name }}
+                    </a>
+                    {% endfor %}
+                </div>
+            </div>
+    </nav>
+
+    {% block content %}
+    {% endblock %}
+
+    <!-- Footer section -->
+    <footer class="footer">
+
+        <!-- Top section -->
+        <div class="footer-top">
+            <p class="footer-name">KWS Resource Hub</p>
+            <!-- tagline -->
+            <p class="footer-tagline">NCEA resource hub for KingsWay students</p>
+        </div>
+
+        <!-- Divider -->
+        <div class="footer-divider"></div>
+
+        <!-- Bottom -->
+        <div class="footer-bottom">
+
+            <!-- Left footer -->
+            <div class="footer-left">
+                <p>© Alex Wang 2026</p>
+                <p>Compiled for educational purposes</p>
+                <p class="footer-attribution">
+                    Icons: Font Awesome —
+                    <a href="https://fontawesome.com/license/free">
+                        fontawesome.com/license/free
+                    </a>
+                </p>
+            </div>
+        
+
+            <!-- Right side for quick links -->
+            <div class="footer-right">
+                <p class="footer-links">Quick Links</p>
+                    <ul>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/mathematics">Calculus</a></li>
+                        <li><a href="/statistics">Statistics</a></li>
+                        <li><a href="/english">English</a></li>
+                        <li><a href="/dgt">DGT</a></li>
+                        <li><a href="/biology">Biology</a></li>
+                        <li><a href="/chemistry">Chemistry</a></li>
+                        <li><a href="/physics">Physics</a></li>
+                    </ul>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
