@@ -9,7 +9,7 @@ from flask import Flask, render_template, request, jsonify
 from database import query_db
 
 app = Flask(__name__)
- 
+
 # index page route
 # handles all queries to the homepage "/"
 @app.route("/")
