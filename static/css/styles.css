@@ -59,7 +59,9 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 40px;
+    width: auto;
+    padding: 8px 14px;
+    gap: 8px;
     height: 40px;
     background: rgba(255,255,255, 0.15);
     border: 1.5px solid rgba(255,255,255,0.3);
@@ -70,6 +72,11 @@ body {
     font-weight: 600;
     cursor: pointer;
     transition: background 0.2s ease, border-color 0.2s ease; 
+}
+
+.menu-label {
+    margin-right: 8px; 
+    font-weight: 500;
 }
 
 .menu-btn:hover {
@@ -497,19 +504,34 @@ body {
 .subject-card.english i      { color: #e74c3c; }
 .subject-card.dgt i { color: #9b59b6; }
 
+/* Resource badge container */
+.resource-badge-container {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: auto;
+}
+
 /* Resource badge */
 .resource-badge {
     width: 40px;
     height: 40px;
     background: #333333;
     border-radius: 50px;
-    margin-top: auto;
     display: flex;
     align-items: center;
     justify-content: center;
-    color:white;
+    color: white;
     font-size: 0.85rem;
     font-weight: bold;
+    flex-shrink: 0;
+}
+
+/* Resource label */
+.resource-label {
+    font-size: 0.85rem;
+    color: #333333;
+    font-weight: 500;
 }
 
 /* Footer */

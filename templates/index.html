@@ -75,8 +75,11 @@
                         <p>{{ subject.description }}</p>
 
                         <!-- Resource Counter placeholder -->
-                        <div class="resource-badge">
-                            {{ subject.resource_count }} 
+                        <div class="resource-badge-container">
+                            <div class="resource-badge">
+                                {{ subject.resource_count }}
+                            </div>
+                            <span class="resource-label">resources</span>
                         </div>
                 </a>
             {% endfor %}
