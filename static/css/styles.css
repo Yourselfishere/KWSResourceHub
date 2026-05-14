@@ -41,13 +41,25 @@ body {
     background: rgba(44, 62, 80,0.9)
 }
 
-/* Logo Setup */
+/* Home Setup */
 .logo img {
     height: 50px;
     width: auto;
     display: block;
     margin: 4px 20px; 
 }
+
+.home {
+    text-decoration: none;
+    color: #FFCB70;
+    font-size: 1rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+    padding: 8px;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+}
+
 
 /* Dropdown menu icon */
 .nav-menu-wrapper {
@@ -413,26 +425,26 @@ body {
 
 /* Subject selection section and heading text */
 .subject-selection {
-    padding: 20px 20px 20px 20px;
+    padding: 80px 40px;
     background: lightgrey;
 }
 
 .subject-selection h2 {
     text-align: center;
-    font-size: large;
-    margin-bottom: 20px;
-    color: #333333;
+    font-weight: 700;
+    font-size: 2rem;
+    margin-bottom: 48px;
+    color: #2c3e50;
 }
 
 /* CSS Grid Layout */
 .card-container {
     display:grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 20px;
+    gap: 24px;
     max-width: 1200px;
     margin: 0 auto;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding: 0 20px;
 }
 
 /* Individual subject */
@@ -440,15 +452,15 @@ body {
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding: 2rem;
+    padding: 2rem 1.5rem;
     background:white;
-    border-radius: 10px;
+    border-radius: 14px;
     padding-inline: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    min-height: 200px;
+    min-height: 220px;
     text-decoration: none;
     color:#333333;
-    gap: 10px;
+    gap: 12px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -467,13 +479,13 @@ body {
 
 /* Card icons */
 .subject-card i {
-    font-size: 2rem;
-    margin-bottom: 5px;
+    font-size: 2.2rem;
+    margin-bottom: 4px;
 }
 
 /* Card Titles */
 .subject-card h3 {
-    font-size: medium;
+    font-size: 1rem;
     font-weight: bold;
     margin: 0;
 }
@@ -484,6 +496,7 @@ body {
     color: #666666;
     text-align: center;
     margin: 0;
+    line-height: 1.5;
     
 }
 
