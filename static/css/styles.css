@@ -1,18 +1,21 @@
-/* Inter font from google fonts */
+/* =====================
+   FONTS
+   ===================== */
+/* Inter provides better readability and looks better aesthetically than system fonts */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
 /* =====================
-   Document Setup and Nav bar (base.html)
+   GLOBAL SETUP (base.html)
    ===================== */
 
-/* Basic Styling */
+/* Reset browser defaults to make sure everything is consistent */
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
 
-/* whole site styling*/
+/* Smooth scrolling for the scroll arrow*/
 html {
     scroll-behavior: smooth;
 }
@@ -21,12 +24,14 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
-/* Flexbox Nav Bar setup */
+/* --------------------
+   NAVIGATION BAR
+   -------------------- */
+
+/* Fixed position keeps nav bar available while scrolling */
 .topnavbar {
     display: flex;
-    /* x-axis */
     justify-content: space-between;
-    /* y-axis */
     align-items: center;
     background: transparent;
     padding: 4px;
@@ -34,14 +39,14 @@ body {
     position: fixed;
     width: 100%;
     transition: background 0.3s ease;
-    z-index: 1000;
+    z-index: 1000; /* Above all page content */
 }
 
+/* Background appears on scroll for better readability over page content */
 .topnavbar.scrolled {
-    background: rgba(44, 62, 80,0.9)
+    background: rgba(44, 62, 80, 0.9)
 }
 
-/* Home Setup */
 .logo img {
     height: 50px;
     width: auto;
@@ -60,13 +65,14 @@ body {
     transition: all 0.2s ease;
 }
 
-
-/* Dropdown menu icon */
+/* Dropdown Menu */
+/* Positioned relative so dropdown can position absolutely relative to this wrapper */
 .nav-menu-wrapper {
     position: relative;
     margin-right: 24px;
 }
 
+/* Semi-transparent background */
 .menu-btn{
     display: flex;
     align-items: center;
@@ -96,7 +102,7 @@ body {
     border-color: rgba(255,255,255,0.5);
 }
 
-/* Dropdown menu */
+/* Dropdown positioned below button with a gap for clear visual seperation */
 .nav-dropdown {
     display: none;
     position: absolute;
@@ -107,14 +113,15 @@ body {
     box-shadow: 0 8px 32px rgba(0,0,0,0.15);
     min-width: 220px;
     padding: 8px;
-    z-index: 2000;
+    z-index: 2000; /* Above navbar to prevent clipping */
 }
 
+/* JavaScript toggles this class */
 .nav-dropdown.open {
     display: block;
 }
 
-/* Single nav items (English, DGT) */
+/* Individual subject links like "English" or "DGT" */
 .nav-item {
     display: flex;
     align-items: center;
@@ -133,6 +140,7 @@ body {
     color: #111;
 }
 
+/* Fixed width for icons so the vertical alignment is the same */
 .nav-item i {
     width: 16px;
     text-align: center;
@@ -140,7 +148,7 @@ body {
     font-size: 0.85rem;
 }
 
-/* Submenu links */
+/* individual standards under Math/Science */
 .nav-subitem {
     display: flex;
     align-items: center;
@@ -153,11 +161,13 @@ body {
     font-weight: 500;
     transition: background 0.15s ease, color 0.15s ease;
 }
-/* Group headers */
+
+/* Collapsible groups (Math, Science) */
 .nav-group {
     position: relative;
 }
 
+/* user-select: none prevents accidental text selection when clicking to expand */
 .nav-group-header {
     display: flex; 
     justify-content: center;
@@ -176,6 +186,7 @@ body {
     background: #f5f5f5
 }
 
+/* First icon is the subject icon (calculator, flask, etc) */
 .nav-group-header > i:first-child {
     width: 16px;
     text-align: center;
@@ -183,6 +194,7 @@ body {
     font-size: 0.85rem;
 }
 
+/* Chevron indicates expandable state */
 .nav-chevron {
     margin-left: auto;
     font-size: 0.7rem;
@@ -190,14 +202,15 @@ body {
     transition: transform 0.2s ease;
 }
 
+/* Rotate chevron when expanded for visual feedback */
 .nav-group.open .nav-chevron {
     transform: rotate(90deg);
 }
 
-/* Submenu */
+/* This is only shown when the JS adds the relvant property */
 .nav-submenu {
     display: none;
-    padding-left: 12px;
+    padding-left: 12px; /* Indent to show clear hierarchy */
     padding-bottom: 4px;
 }
 
@@ -217,7 +230,7 @@ body {
     font-size: 0.8rem;
 }
 
-/* Divider */
+/* Visual separator between menu sections */
 .nav-divider {
     height: 1px;
     background: #f0f0f0;
@@ -226,43 +239,46 @@ body {
 
 
 /* =====================
-   Main page sections (index.html)
+   HOMEPAGE (index.html)
    ===================== */
 
-/* Hero Section */
+/* --------------------
+   HERO SECTION
+   -------------------- */
+
+/* dvh (dynamic viewport height) accounts for mobile browser chrome appearing/disappearing */
 .hero {
     min-height: 100vh;
-    height:100dvh;
+    height: 100dvh;
     background-image: linear-gradient(135deg, #2c3e50, #0077cc);
-    display:flex;
+    display: flex;
     justify-content: center;
     align-items: center;
     text-align: center;
-    padding-top: 120px;
+    padding-top: 120px; /* Account for fixed navbar height */
     box-sizing: border-box;
 }
 
-/* Hero Container */
 .hero-container {
     max-width: 800px;
     padding-left: 10px;
     padding-right: 10px;
     flex-direction: column;
     gap: 1rem;
-    margin-bottom: 10%;
+    margin-bottom: 10%; 
 }
 
-/* Hero text */
+/* Eyebrow text */
 .hero-container p:first-child {
-    color:white;
+    color: white;
     opacity: 0.7;
     letter-spacing: 3px;
     font-size: small;
 }
 
-/* Punchline */
+/* Main headline */
 .hero-container h1 {
-    color:white; 
+    color: white; 
     font-size: 5rem;
     font-weight: bold;
     margin-bottom: 40px;
@@ -270,22 +286,22 @@ body {
 
 /* Subheading */
 .hero-container p:last-of-type {
-    color:white;
+    color: white;
     font-size: medium;
     max-width: 800px;
     margin: 0 auto;
     padding-top: 20px;
 }
 
-/* Rotating line code */
+/* Animated rotating text effect */
 .rotating-line {
     align-items: baseline;
     font-size: 2.5rem;
-    color:white;
+    color: white;
     font-weight: normal;
 }
 
-/* Text container */
+/* Overflow hidden masks words above/below current visible word */
 .text-container {
     display:inline-flex;
     flex-direction: column;
@@ -295,7 +311,7 @@ body {
     margin: 0 10px;
 }
 
-/* Individual words */
+/* Each word stacked vertically; animation slides them upward */
 .text-container span {
     height: 3rem;
     color: #FFCB70;
@@ -303,9 +319,10 @@ body {
     font-weight: bold;
     line-height: 3rem;
     animation: moveUp 8s linear infinite;
+    margin-right: 4px;
 }
 
-/* KEYFRAME ANIMATION */
+/* Animation cycles through 4 words, pausing on each (7-12%, 25-30%, etc are the pause points) */
 @keyframes moveUp {
   0% {
     transform: translateY(0);
@@ -340,7 +357,7 @@ body {
   }
 
   80% {
-    transform: translateY(0);
+    transform: translateY(0); /* Loop back to start */
   }
 
   100% {
@@ -348,10 +365,10 @@ body {
   }
 }
 
-
-/* Scroll arrow */
+/* Scroll indicator */
+/* Cubic bezier creates more natural bounce than linear easing */
 .scroll-arrow {
-    display:block;
+    display: block;
     font-size: 2.5rem; 
     animation: bounce 1600ms infinite cubic-bezier(0.445, 0.05, 0.55, 0.95); 
     cursor: pointer;
@@ -360,70 +377,65 @@ body {
 }
 
 .scroll-arrow a {
-    color:white;
+    color: white;
     text-decoration: none;
 }
 
 @keyframes bounce {
-50% {
+  50% {
     transform: translateY(-15px);
-}
+  }
 }
 
-/* About section */
+/* --------------------
+   ABOUT SECTION
+   -------------------- */
+
 .about-section {
     background: #e8f4fd;
     padding: 160px 100px;
     text-align: center;
 }
 
-/* About container */
 .about-container {
     max-width: 700px;
     margin: 0 auto;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap:20px;
+    gap: 20px;
 }
 
+/* Eyebrow label */
 .about-label {
     font-size: small;
     text-transform: uppercase;
-    letter-spacing: 10px;
-    color:#0077cc;
+    letter-spacing: 10px; 
+    color: #0077cc;
     font-weight: bold;
     margin: 20px 0 0 0;
 }
 
 .about-section h2 {
     font-size: large;
-    color:#2c3e50;
-    margin:0;
+    color: #2c3e50;
+    margin: 0;
     font-weight: bold;
 }
 
 .about-text {
     font-size: 1.1rem;
     color: #555555;
-    line-height: 1.7rem;
+    line-height: 1.7rem; /* Generous line height improves readability for body text */
     margin: 0 0 20px 0;
     max-width: 600px;
     text-align: center;
 }
 
-/* Mobile responsive */
-@media (max-width: 480px) {
-    .hero-container h1 {
-        font-size: 2rem;
-    }
+/* --------------------
+   SUBJECT CARDS
+   -------------------- */
 
-    .hero-container p {
-        font-size: smaller;
-    }
-}
-
-/* Subject selection section and heading text */
 .subject-selection {
     padding: 80px 40px;
     background: lightgrey;
@@ -437,9 +449,9 @@ body {
     color: #2c3e50;
 }
 
-/* CSS Grid Layout */
+/* auto-fill creates responsive columns without needing any media queries and the cards wrap naturally */
 .card-container {
-    display:grid;
+    display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
     max-width: 1200px;
@@ -447,25 +459,23 @@ body {
     padding: 0 20px;
 }
 
-/* Individual subject */
 .subject-card {
     display: flex;
     flex-direction: column;
     align-items: center;
     padding: 2rem 1.5rem;
-    background:white;
+    background: white;
     border-radius: 14px;
     padding-inline: 10px;
     box-shadow: 0 2px 8px rgba(0,0,0,0.1);
     min-height: 220px;
     text-decoration: none;
-    color:#333333;
+    color: #333333;
     gap: 12px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-/* Card hover effects */
-
+/* Lift on hover provides feedback */
 .subject-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 20px rgba(0,0,0,0.15);
@@ -477,55 +487,49 @@ body {
     box-shadow: 0 4px 10px rgba(0,0,0,0.15);    
 }
 
-/* Card icons */
 .subject-card i {
     font-size: 2.2rem;
     margin-bottom: 4px;
 }
 
-/* Card Titles */
 .subject-card h3 {
     font-size: 1rem;
     font-weight: bold;
     margin: 0;
 }
 
-/* Card descriptions */
 .subject-card p {
     font-size: small;
     color: #666666;
     text-align: center;
     margin: 0;
     line-height: 1.5;
-    
 }
 
-/* Subject card colours */
-.subject-card.calculus        { border-top: 4px solid #3498db; }
-.subject-card.statistics     { border-top: 4px solid #3498db; }
-.subject-card.english      { border-top: 4px solid #e74c3c; }
+/* Using border-top keeps colored accent without the visual weight of a full border */
+.subject-card.calculus, .subject-card.statistics { border-top: 4px solid #3498db; }
+.subject-card.english { border-top: 4px solid #e74c3c; }
 .subject-card.dgt { border-top: 4px solid #9b59b6; }
 .subject-card.chemistry { border-top: 4px solid #27ae60; }
 .subject-card.biology { border-top: 4px solid #2ecc71; }
-.subject-card.physics { border-top: 4px solid #1abc9c}
+.subject-card.physics { border-top: 4px solid #1abc9c; }
 
-/* Subject icon colours */
-.subject-card.calculus i, .subject-card.statistics i        { color: #3498db; }
-.subject-card.chemistry i      { color: #27ae60; }
-.subject-card.biology i      { color: #2ecc71; }
-.subject-card.physics i      { color: #1abc9c; }
-.subject-card.english i      { color: #e74c3c; }
+/* Icon colors match border for consistent colour coding of subjects */
+.subject-card.calculus i, .subject-card.statistics i { color: #3498db; }
+.subject-card.chemistry i { color: #27ae60; }
+.subject-card.biology i { color: #2ecc71; }
+.subject-card.physics i { color: #1abc9c; }
+.subject-card.english i { color: #e74c3c; }
 .subject-card.dgt i { color: #9b59b6; }
 
-/* Resource badge container */
+/* Resource count indicator */
 .resource-badge-container {
     display: flex;
     align-items: center;
     gap: 8px;
-    margin-top: auto;
+    margin-top: auto; /* Push to bottom of card regardless of description length */
 }
 
-/* Resource badge */
 .resource-badge {
     width: 40px;
     height: 40px;
@@ -537,23 +541,25 @@ body {
     color: white;
     font-size: 0.85rem;
     font-weight: bold;
-    flex-shrink: 0;
+    flex-shrink: 0; /* Prevents badge squishing if label is long */
 }
 
-/* Resource label */
 .resource-label {
     font-size: 0.85rem;
     color: #333333;
     font-weight: 500;
 }
 
-/* Footer */
+/* --------------------
+   FOOTER
+   -------------------- */
+
 .footer {
-    background:#2c3e50;
+    background: #2c3e50;
     padding: 30px 60px;
     display: flex;
     flex-direction: column;
-    gap:20px
+    gap: 20px;
 }
 
 .footer-top {
@@ -584,10 +590,11 @@ body {
 }
 
 .footer-bottom {
-    display:flex;
+    display: flex;
     justify-content: space-between;
     align-items: flex-start;
 }
+
 .footer-left {
     display: flex;
     flex-direction: column;
@@ -596,23 +603,23 @@ body {
 
 .footer-left p {
     font-size: x-small;
-    color:rgba(255,255,255,0.6);
+    color: rgba(255,255,255,0.6);
     margin: 0;
 }
 
 .footer-attribution a {
-    color:rgba(255,255,255, 0.6)
+    color: rgba(255,255,255, 0.6);
 }
 
 .footer-attribution a:hover {
-    color:white;
+    color: white;
 }
 
 .footer-links {
     font-size: x-small;
     text-transform: uppercase;
     letter-spacing: 3px;
-    color:white; 
+    color: white; 
     font-weight: bold;
     margin-bottom: 8px;
 }
@@ -623,32 +630,32 @@ body {
     margin: 0;
     display: flex;
     flex-wrap: wrap;
-    gap:12px;
+    gap: 12px;
 }
 
 .footer-right ul li a {
     font-size: x-small;
-    color:rgba(255,255,255,0.6)
+    color: rgba(255,255,255,0.6);
 }
 
-@media (max-width: 480px) {
-   .footer-bottom {
-    flex-direction: column;
-    gap:12px
-   }
-}
-    
+
 /* =====================
-   Subject page (subject.html)
+   SUBJECT PAGE (subject.html)
    ===================== */
 
+/* Navbar always opaque on subject pages since there's no hero background */
 .subject-page .topnavbar {
     background: rgba(44, 62, 80, 0.95);
 }
 
+/* --------------------
+   SUBJECT HEADER
+   -------------------- */
+
+/* CSS variable allows dynamic theming per subject without duplicate CSS */
 .subject-header {
     background: var(--subject-colour);
-    padding: 100px 20px 40px;
+    padding: 100px 20px 40px; /* The top padding is needed because of the fixed navbar */
     text-align: center;
 }
 
@@ -670,7 +677,7 @@ body {
     font-size: 2.5rem;
     font-weight: 700;
     margin: 0 0 8px 0;
-    letter-spacing: -0.5px;
+    letter-spacing: -0.5px; /* Improves readibility */
 }
 
 .subject-header p {
@@ -678,6 +685,10 @@ body {
     font-size: 1.1rem;
     margin: 0;
 }
+
+/* --------------------
+   LEVEL SELECTOR
+   -------------------- */
 
 .level-selector {
     display: flex;
@@ -687,6 +698,7 @@ body {
     padding: 0 20px;
 }
 
+/* Border matches subject color for consistent theming */
 .level-btn {
     padding: 12px 32px;
     border: 2px solid var(--subject-colour);
@@ -700,6 +712,7 @@ body {
     transition: all 0.3s ease;
 }
 
+/* color-mix creates tinted background without hardcoding multiple color variants */
 .level-btn:hover {
     background: color-mix(in srgb, var(--subject-colour) 8%, white);
     transform: translateY(-2px);
@@ -711,6 +724,10 @@ body {
     color: white;
     box-shadow: 0 4px 12px rgba(39, 174, 96, 0.3);
 }
+
+/* --------------------
+   STANDARDS TABS
+   -------------------- */
 
 .standards-container {
     max-width: 1200px;
@@ -726,16 +743,21 @@ body {
     margin-bottom: 16px;
 }
 
+/* Horizontal scroll for many standards */
 .standards-tab-list {
     display: flex;
     overflow-x: auto;
-    scrollbar-width: none;
+    scrollbar-width: none; /* Firefox */
+    -webkit-overflow-scrolling: touch; /* iOS momentum scrolling */
+    scroll-snap-type: x mandatory;
 }
 
+/* Hide scrollbar in WebKit browsers for cleaner look */
 .standards-tab-list::-webkit-scrollbar {
     display: none;
 }
 
+/* flex-shrink: 0 prevents tabs collapsing when container is narrow */
 .standard-tab {
     flex: 1;
     min-width: 140px;
@@ -747,12 +769,14 @@ body {
     background: transparent;
     font-family: 'Inter', sans-serif;
     transition: all 0.2s ease;
+    flex-shrink: 0;
 }
 
 .standard-tab:hover {
     background: #fafafa;
 }
 
+/* Border-bottom indicator shows active tab without full outline weight as it would add too much visual clutter*/
 .standard-tab.active {
     background: white;
     border-bottom-color: var(--subject-colour);
@@ -766,6 +790,7 @@ body {
     margin-bottom: 4px;
 }
 
+/* Active state shows the standard code and name */
 .standard-tab.active .standard-code { color: var(--subject-colour); }
 
 .standard-name {
@@ -777,6 +802,10 @@ body {
 
 .standard-tab.active .standard-name { color: var(--subject-colour); }
 
+/* --------------------
+   STANDARD CONTENT
+   -------------------- */
+
 .standard-content {
     background: white;
     border-radius: 16px;
@@ -784,6 +813,7 @@ body {
     padding: 32px;
 }
 
+/* flex-wrap allows badge to drop to new line on narrow screens */
 .standard-header {
     display: flex;
     justify-content: space-between;
@@ -802,6 +832,7 @@ body {
     margin: 0;
 }
 
+/* white-space: nowrap prevents the reousce count splitting across lines */
 .resource-count-badge {
     background: var(--subject-colour);
     color: white;
@@ -811,6 +842,10 @@ body {
     font-size: 0.95rem;
     white-space: nowrap;
 }
+
+/* --------------------
+   FILTER PILLS
+   -------------------- */
 
 .filter-pills {
     display: flex;
@@ -847,6 +882,7 @@ body {
     color: var(--subject-colour);
 }
 
+/* Count updates via JavaScript when filters change */
 .pill-count {
     background: #ebebeb;
     color: #666;
@@ -861,12 +897,18 @@ body {
     color: white;
 }
 
+/* --------------------
+   RESOURCE CARDS
+   -------------------- */
+
+/* auto-fill creates responsive grid without breakpoints */
 .resource-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
     gap: 16px;
 }
 
+/* Double-click opens resource for power users */
 .resource-card {
     background: #f8f9fa;
     border-radius: 14px;
@@ -886,6 +928,7 @@ body {
     transform: translateY(-3px);
 }
 
+/* align-self: flex-start stops badge stretching full width */
 .resource-type-badge {
     display: inline-flex;
     align-items: center;
@@ -897,6 +940,7 @@ body {
     align-self: flex-start;
 }
 
+/* Color-coded badges help users quickly identify resource types */
 .resource-type-badge.video-tutorial,
 .resource-type-badge.relevant-videos {
     background: #fde8e8;
@@ -929,6 +973,7 @@ body {
     line-height: 1.4;
 }
 
+/* flex: 1 pushes button to bottom regardless of description length */
 .resource-description {
     font-size: 0.88rem;
     color: #777;
@@ -955,9 +1000,218 @@ body {
     transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease;
 }
 
+/* Button fills with subject color on hover for stronger feedback */
 .resource-button:hover {
     background: var(--subject-colour);
     border-color: var(--subject-colour);
     color: white;
 }
 
+
+/* =====================
+   RESPONSIVE DESIGN
+   ===================== */
+
+/* Tablet: 2-column grid */
+@media (max-width: 768px) {
+
+    .card-container {
+        grid-template-columns: repeat(2, 1fr);
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    /* Single column prevents resource cards feeling cramped */
+    .resource-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .hero-container h1 {
+        font-size: 3.5rem;
+    }
+
+    .rotating-line {
+        font-size: 1.8rem;
+    }
+
+    /* Stack title and badge vertically on narrow screens */
+    .standard-header {
+        flex-direction: column;
+    }
+
+    .subject-header h1 {
+        font-size: 2rem;
+    }
+
+    .about-this-site {
+        padding: 80px 40px;
+    }
+
+    .subject-selection {
+        padding: 60px 20px;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 24px;
+    }
+}
+
+/* Mobile: single column for all cards prevents squishing */
+@media (max-width: 480px) {
+
+    .card-container {
+        grid-template-columns: 1fr;
+        padding-left: 16px;
+        padding-right: 16px;
+    }
+
+    .hero-container h1 {
+        font-size: 2.2rem;
+        margin-bottom: 20px;
+        margin-top: 10px;
+        text-align: center;
+        max-width: 95vw;
+    }
+
+    .rotating-line {
+        font-size: 1.3rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 0.25rem;
+    }
+
+    .text-container {
+        height: 2.4rem;
+    }
+
+    .text-container span {
+        height: 2.4rem;
+        line-height: 2.4rem;
+    }
+
+    .hero {
+        padding-top: 80px;
+        padding-left: 20px;
+        padding-right: 20px;
+    }
+
+    .hero-container {
+        margin-bottom: 5%;
+        gap: 1.5rem;
+    }
+
+    .about-this-site {
+        padding: 60px 24px;
+    }
+
+    .scroll-arrow {
+        padding-top: 80px;
+    }
+
+    .subject-selection {
+        padding: 40px 16px;
+    }
+
+    .subject-header {
+        padding: 90px 16px 30px;
+    }
+
+    .subject-header h1 {
+        font-size: 1.8rem;
+    }
+
+    .level-btn {
+        padding: 8px 20px;
+        font-size: 0.9rem;
+    }
+
+    .filter-pill {
+        font-size: 0.8rem;
+        padding: 6px 12px;
+    }
+
+    .standard-content {
+        padding: 16px;
+    }
+
+    .standard-title {
+        font-size: 1rem;
+    }
+
+    .standards-container {
+        padding: 0 12px 40px;
+    }
+
+    .nav-dropdown {
+        max-width: 90vw;
+        max-height: 80vh;
+        overflow-y: auto;
+    }
+
+    .footer-bottom {
+        flex-direction: column;
+        gap: 16px;
+    }
+
+    .footer {
+        padding: 24px 20px;
+    }
+    
+    @keyframes moveUp {
+        0% { transform: translateY(0); }
+        7% { transform: translateY(0); }
+        12% { transform: translateY(-2.4rem); }
+        25% { transform: translateY(-2.4rem); }
+        30% { transform: translateY(-4.8rem); }
+        50% { transform: translateY(-4.8rem); }
+        55% { transform: translateY(-7.2rem); }
+        75% { transform: translateY(-7.2rem); }
+        80% { transform: translateY(0); }
+        100% { transform: translateY(0); }
+    }
+}
+
+
+/* Ultra-wide: max-width prevents content stretching too thin */
+@media (min-width: 1400px) {
+    .hero-container {
+        max-width: 900px;
+    }
+
+    .rotating-line {
+        font-size: 3rem;
+    }
+
+    .text-container {
+        height: 3.6rem;
+    }
+
+    .text-container span {
+        height: 3.6rem;
+        line-height: 3.6rem;
+    }
+
+    @keyframes moveUp {
+        0% { transform: translateY(0); }
+        7% { transform: translateY(0); }
+        12% { transform: translateY(-3.6rem); }
+        25% { transform: translateY(-3.6rem); }
+        30% { transform: translateY(-7.2rem); }
+        50% { transform: translateY(-7.2rem); }
+        55% { transform: translateY(-10.8rem); }
+        75% { transform: translateY(-10.8rem); }
+        80% { transform: translateY(0); }
+        100% { transform: translateY(0); }
+    }
+
+    .card-container {
+        max-width: 1400px;
+    }
+
+    .standards-container {
+        max-width: 1400px;
+    }
+}

@@ -68,6 +68,7 @@
             
             <!-- Jinja loop for subject cards -->
             {% for subject in subjects %}
+                <!-- For each subject card: add icon, name, description and resource badge -->
                 <a href="/{{subject.url}}"
                     class="subject-card {{subject.name | lower}}">
                         <i class ="{{subject.icon}}"></i>
