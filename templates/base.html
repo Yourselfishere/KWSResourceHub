@@ -12,27 +12,38 @@
     <!-- Font Awesome setup -->
     <script src="https://kit.fontawesome.com/c703a6f906.js" crossorigin="anonymous"></script>
 </head>
+
 <body class="{% block body_class %}{% endblock %}">
-    <!-- Top Navigation Bar --> 
+    <!-- Navigation Bar --> 
     <nav class="topnavbar">
         <!-- Logo Section -->
         <div class="logo">
             <a href="/"><img src="/static/img/KingsWayLogo.svg" alt="KingsWayLogo"></a>
         </div>
-
+        
+        <!-- Navigation Menu -->
         <div class="nav-menu-wrapper">
+
+            <!-- Menu Button -->
             <button class="menu-btn" id="menu-btn">
                 <span class="menu=label">Menu</span>
                 <i class="fa-solid fa-bars"></i>
             </button>
+
+                <!-- Dropdown logic -->
                 <div class="nav-dropdown" id="nav-dropdown">
+
+                    <!-- Repeats for every group name, then groups subject -->
                     {% for group_name, group_subjects in menu_group.items() %}
+                    <!-- If the subject exists as part of a group, put it under the relvant group folder -->
                     <div class="nav-group">
                         <div class="nav-group-header">
                             <i class="fa-solid fa-folder"></i>
                             {{ group_name }}
                             <i class="fa-solid fa-chevron-right nav-chevron"></i>
                         </div>
+
+                        <!-- Put the individual subjects in the dropdown, as well as the folder items -->
                         <div class="nav-submenu">
                             {% for subject in group_subjects %}
                             <a href="/{{ subject.url }}" class="nav-subitem">
@@ -43,13 +54,16 @@
                         </div>
                     </div>
                     {% endfor %}
+
                     <div class="nav-divider"></div>
+                    <!-- Add individual subjects that are not part of a folder -->
                     {% for subject in menu_solo %}
                     <a href="/{{ subject.url }}" class="nav-item">
                         <i class="{{ subject.icon }}"></i>
                         {{ subject.name }}
                     </a>
                     {% endfor %}
+                    
                 </div>
             </div>
     </nav>

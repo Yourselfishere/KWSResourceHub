@@ -4,6 +4,7 @@
 
 {% block content %}
 
+<!-- CSS variable set at root allows consistent theming -->
 <div class="subject-root" style="--subject-colour: {{ subject.colour }}">
 
     <!-- Subject Header -->
@@ -16,6 +17,7 @@
     </section>
 
     <!-- Level Selector -->
+    <!-- Default to Level 2 active since most students start here -->
     <div class="level-selector">
         <button class="level-btn active" data-level="2">Level 2</button>
         <button class="level-btn" data-level="3">Level 3</button>
@@ -28,6 +30,7 @@
         <div class="standards-tabs">
             <div class="standards-tab-list">
                 {% for standard in standards %}
+                <!-- First tab active by default to ensure something is always selected -->
                 <button class="standard-tab {% if loop.first %}active{% endif %}"
                         data-standard="{{ standard.code }}"
                         data-level="{{ standard.ncea_level }}"
@@ -46,15 +49,19 @@
             <!-- Standard Header -->
             <div class="standard-header">
                 {% if standards %}
+                <!-- Show first standard by default to match active tab -->
                 <h2 class="standard-title">{{ standards[0].code }} — {{ standards[0].description }}</h2>
                 {% else %}
+                <!-- Fallback when no standards exist for subject -->
                 <h2 class="standard-title">{{ subject.name }} Resources</h2>
                 {% endif %}
+                <!-- Badge updates via JS when filters change -->
                 <span class="resource-count-badge" id="resource-count-badge">{{ total_count }} resources</span>
             </div>
 
             <!-- Filter Pills -->
             <div class="filter-pills">
+                <!-- 'All' filter active by default to show everything initially -->
                 <button class="filter-pill active" data-filter="all">
                     <i class="fa-solid fa-layer-group"></i>
                     All
@@ -62,13 +69,14 @@
                 </button>
                 {% for category in categories %}
                 <button class="filter-pill" data-filter="{{ category.name }}">
+                    <!-- Icon logic matches resource -->
                     {% if 'video' in category.name %}
                         <i class="fa-solid fa-video"></i>
                     {% elif category.name == 'study-guide' %}
                         <i class="fa-solid fa-book"></i>
                     {% elif category.name == 'past-paper' %}
                         <i class="fa-solid fa-file-lines"></i>
-                    {% elif category.name == 'other' %}
+                    {% elif category.name == 'other' %} 
                         <i class="fa-solid fa-folder"></i>
                     {% endif %}
                     {{ category.name | replace('-', ' ') | title }}
@@ -77,13 +85,16 @@
                 {% endfor %}
             </div>
 
-            <!-- Resource Grid -->
+            <!-- Resource Grid --> 
             <div class="resource-grid" id="resource-container">
                 {% for resource in resources %}
+                <!-- Double-click opens the reouserce in a new tab also -->
                 <div class="resource-card"
                     data-category="{{ resource.category_name }}"
-                    data-standard="{{ resource.standard_id }}">
+                    data-standard="{{ resource.standard_id }}"
+                    ondblclick="window.open('{{ resource.url }}')">
 
+                    <!-- Category badge class matches filter data-filter for JS filtering -->
                     <span class="resource-type-badge {{ resource.category_name }}">
                         {% if 'video' in resource.category_name %}
                             <i class="fa-solid fa-video"></i>
@@ -100,6 +111,7 @@
                     <h3>{{ resource.title }}</h3>
                     <p class="resource-description">{{ resource.description }}</p>
 
+                    <!-- Different text based on resource type  -->
                     <a href="{{ resource.url }}" target="_blank" class="resource-button">
                         {% if 'video' in resource.category_name %}
                             <i class="fa-solid fa-play"></i> Watch
@@ -115,6 +127,7 @@
             </div>
 
             <!-- Empty state -->
+            <!-- Hidden by default; JS shows when filters return no results -->
             <div class="empty-state" id="empty-state" style="display:none;">
                 <i class="fa-solid fa-folder-open"></i>
                 <p>No resources for this standard yet.</p>

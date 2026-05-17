@@ -33,6 +33,7 @@ def index():
 def page_not_found(e): 
     return render_template("404.html")
 
+# Add all the subjects into all the pages that need it
 @app.context_processor
 def inject_subjects():
     subjects = query_db("SELECT * FROM subjects ORDER BY subject_id")
