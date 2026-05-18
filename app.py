@@ -1,19 +1,17 @@
-# app.py 
-# Defines all the flask routes and each route handles one url template
+"""Flask application with routes for KWS Resource Hub.
 
-# import flask
-import flask 
-from flask import Flask, render_template, request, jsonify
+Defines all the flask routes and each route handles one URL template.
+"""
 
-# import query_db
+from flask import Flask, render_template
 from database import query_db
 
 app = Flask(__name__)
 
-# index page route
-# handles all queries to the homepage "/"
+
 @app.route("/")
 def index():
+    """Render the home page with all subjects and resource counts."""
     subjects = query_db("SELECT * FROM subjects ORDER BY subject_id")
     # Convert to dictionaries so we can add properties
     subjects = [dict(s) for s in subjects]
@@ -21,71 +19,69 @@ def index():
     # Get the resource counts for each subject so that it can be displayed correctly
     for subject in subjects: 
         count = query_db(
-            "SELECT COUNT(*) AS total FROM resources WHERE subject_id = ?",
+            "SELECT COUNT(*) AS total FROM resources"
+            " WHERE subject_id = ?",
             (subject["subject_id"],)
         )
         subject["resource_count"] = count[0]["total"] if count else 0
 
     return render_template("index.html", subjects=subjects)
-    
-# 404 page
+
 @app.errorhandler(404)
-def page_not_found(e): 
+def page_not_found(e):
+    """Render the 404 not found error page."""
     return render_template("404.html")
 
-# Add all the subjects into all the pages that need it
+
 @app.context_processor
 def inject_subjects():
+    """Inject subjects and menu groups into all template contexts."""
     subjects = query_db("SELECT * FROM subjects ORDER BY subject_id")
 
     groups = {}
     solo = []
-    for s in subjects: 
-        # Fixed error
-        # Before it would crash if there were no menu groups but now it places everything into "Null" if there isn't.
+    for s in subjects:
         s_dict = dict(s)
         menu_group = s_dict.get('menu_group')
-        if menu_group: 
+        if menu_group:
             groups.setdefault(menu_group, []).append(s)
-        else: 
+        else:
             solo.append(s)
     return dict(subjects=subjects, menu_group=groups, menu_solo=solo)
 
 # Subject pages
 @app.route("/<subject_url>")
 def subject_page(subject_url):
-    # get subject from database matching url column
+    """Render subject page with resources and standards."""
     subject = query_db(
         "SELECT * FROM subjects WHERE url = ?",
         (subject_url,)
     )
-    
-    # if no subject found return 404
+
     if not subject:
         return render_template("404.html"), 404
-    
+
     subject = subject[0]
     
     # get all resources for this subject joined with category names
     resources = query_db("""
-        SELECT 
+        SELECT
             resources.*,
             categories.name AS category_name
         FROM resources
-        JOIN categories 
+        JOIN categories
             ON resources.categories_id = categories.categories_id
         WHERE resources.subject_id = ?
         ORDER BY resources.date_added DESC
     """, (subject["subject_id"],))
-    
-    # get categories with resource counts
-    categories = query_db(""" 
-        SELECT 
+
+    categories = query_db("""
+        SELECT
             categories.categories_id,
             categories.name,
             COUNT(resources.resource_id) AS resource_count
         FROM categories
-        LEFT JOIN resources 
+        LEFT JOIN resources
             ON categories.categories_id = resources.categories_id
             AND resources.subject_id = ?
         GROUP BY categories.categories_id, categories.name
@@ -97,24 +93,22 @@ def subject_page(subject_url):
             WHEN 'other'             THEN 5
         END
     """, (subject["subject_id"],))
-    
-    # get standards for a subjected ordered by level then code 
-    standards = query_db(""" 
+
+    standards = query_db("""
         SELECT *
         FROM standards
         WHERE subject_id = ?
         ORDER BY ncea_level, code
     """, (subject["subject_id"],))
 
-    # get total resource count
     total = query_db("""
         SELECT COUNT(*) AS total
         FROM resources
         WHERE subject_id = ?
     """, (subject["subject_id"],))
-    
+
     total_count = total[0]["total"] if total else 0
-    
+
     return render_template(
         "subject.html",
         subject=subject,
@@ -124,5 +118,7 @@ def subject_page(subject_url):
         standards=standards,
     )
 
+
 if __name__ == "__main__":
     app.run(debug=True)
+

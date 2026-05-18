@@ -48,15 +48,15 @@ document.querySelectorAll('.nav-group-header').forEach(function(header) {
 
         // Toggle "open" for the clicked group if it isn't open already
         if (!active) {
-            group.classList.add('open')
+            group.classList.add('open');
         }
 
-    })
+    });
 });
 //-----------------------------------------------------------------------------------------------------------------------------//
 // HOME PAGE 
 window.addEventListener('scroll', () => {
-  const navbar = document.querySelector('.topnavbar') // Select the nav element
+  const navbar = document.querySelector('.topnavbar'); // Select the nav element
   if (window.scrollY > 0) { // Check if scrolled more than 0 pixels
     navbar.classList.add('scrolled');
   } else {
@@ -211,7 +211,7 @@ for (var i = 0; i < standardTabs.length; i++) {
         var allFilter = document.querySelector('.filter-pill[data-filter="all"]');
         if (allFilter) {
             allFilter.classList.add('active');
-            allFilter.click()
+            allFilter.click();
         }
     });
 }
